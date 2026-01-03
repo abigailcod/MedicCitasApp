@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Crear ADMIN
-        User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@mail.com'],
             [
                 'name' => 'Admin',
@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
             ]
         );
+        
+        // Asegurar rol de admin (por si el usuario ya existía con otro rol)
+        if ($admin->role !== 'admin') {
+            $admin->role = 'admin';
+            $admin->save();
+        }
 
         // 2. Crear DOCTOR (Usuario + Perfil Doctor)
         $userDoctor = User::firstOrCreate(
@@ -36,6 +42,11 @@ class DatabaseSeeder extends Seeder
                 'role' => 'medico',
             ]
         );
+
+        if ($userDoctor->role !== 'medico') {
+            $userDoctor->role = 'medico';
+            $userDoctor->save();
+        }
 
         Doctor::firstOrCreate(
             ['user_id' => $userDoctor->id],
@@ -53,6 +64,11 @@ class DatabaseSeeder extends Seeder
                 'role' => 'paciente',
             ]
         );
+
+        if ($userPaciente->role !== 'paciente') {
+            $userPaciente->role = 'paciente';
+            $userPaciente->save();
+        }
 
         Patient::firstOrCreate(
             ['user_id' => $userPaciente->id],
