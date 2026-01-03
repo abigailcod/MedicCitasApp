@@ -70,7 +70,7 @@
                             <i class="fas fa-user-circle me-1"></i> 
                             {{ Auth::user()->name }}
                             <span class="badge bg-light text-dark ms-2 small">
-                                {{ ucfirst(Auth::user()->role) }}
+                                Role: {{ Auth::user()->role }}
                             </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -198,6 +198,7 @@
 
 /* Dropdown menu */
 .navbar-custom .dropdown-menu {
+    background-color: white !important;
     border: none;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     border-radius: 12px;
@@ -205,6 +206,7 @@
     min-width: 280px;
     padding: 0.5rem 0;
     animation: fadeInDown 0.3s ease;
+    z-index: 9999 !important;
 }
 
 .navbar-custom .dropdown-header {
