@@ -7,7 +7,6 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-\App\Models\User::factory()->count(10)->create();
 
 class DatabaseSeeder extends Seeder
 {
@@ -31,13 +30,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'Dr Juan',
             'email' => 'espinozaabigail2006@gmail.com',
             'password' => bcrypt('password123'),
-            'role' => 'medico', // Ojo: Asegúrate de usar siempre 'medico' o 'doctor' consistentemente
+            'role' => 'medico',
         ]);
 
-        // Crear la ficha del doctor asociada
         Doctor::create([
-            'user_id' => $userDoctor->id, // Aquí usamos el ID del usuario recién creado
-            'especialidad' => 'Traumatologia', // Coincide con tu migración 'doctors'
+            'user_id' => $userDoctor->id,
+            'especialidad' => 'Traumatologia',
         ]);
 
         // 3. Crear PACIENTE (Usuario + Perfil Paciente)
@@ -48,14 +46,13 @@ class DatabaseSeeder extends Seeder
             'role' => 'paciente',
         ]);
 
-        // Crear la ficha del paciente asociada
         Patient::create([
-            'user_id' => $userPaciente->id, // Vinculamos con el usuario Carlos
+            'user_id' => $userPaciente->id,
             'edad' => 30,
-            'sexo' => 'Masculino', // Coincide con tu migración 'patients'
+            'sexo' => 'Masculino',
         ]);
         
         // (Opcional) Crear más datos falsos si tienes factories
-        // User::factory(10)->create();
+        User::factory(10)->create();
     }
 }
