@@ -18,41 +18,52 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Crear ADMIN
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@mail.com',
-            'password' => bcrypt('password123'),
-            'role' => 'admin',
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@mail.com'],
+            [
+                'name' => 'Admin',
+                'password' => bcrypt('password123'),
+                'role' => 'admin',
+            ]
+        );
 
         // 2. Crear DOCTOR (Usuario + Perfil Doctor)
-        $userDoctor = User::create([
-            'name' => 'Dr Juan',
-            'email' => 'espinozaabigail2006@gmail.com',
-            'password' => bcrypt('password123'),
-            'role' => 'medico',
-        ]);
+        $userDoctor = User::firstOrCreate(
+            ['email' => 'espinozaabigail2006@gmail.com'],
+            [
+                'name' => 'Dr Juan',
+                'password' => bcrypt('password123'),
+                'role' => 'medico',
+            ]
+        );
 
-        Doctor::create([
-            'user_id' => $userDoctor->id,
-            'especialidad' => 'Traumatologia',
-        ]);
+        Doctor::firstOrCreate(
+            ['user_id' => $userDoctor->id],
+            [
+                'especialidad' => 'Traumatologia',
+            ]
+        );
 
         // 3. Crear PACIENTE (Usuario + Perfil Paciente)
-        $userPaciente = User::create([
-            'name' => 'Carlos',
-            'email' => 'abigailwiracocha@gmail.com',
-            'password' => bcrypt('password123'),
-            'role' => 'paciente',
-        ]);
+        $userPaciente = User::firstOrCreate(
+            ['email' => 'abigailwiracocha@gmail.com'],
+            [
+                'name' => 'Carlos',
+                'password' => bcrypt('password123'),
+                'role' => 'paciente',
+            ]
+        );
 
-        Patient::create([
-            'user_id' => $userPaciente->id,
-            'edad' => 30,
-            'sexo' => 'Masculino',
-        ]);
+        Patient::firstOrCreate(
+            ['user_id' => $userPaciente->id],
+            [
+                'edad' => 30,
+                'sexo' => 'Masculino',
+            ]
+        );
         
         // (Opcional) Crear más datos falsos si tienes factories
-        User::factory(10)->create();
+        // Comentamos esto para evitar crear usuarios extra en cada deploy si no es intencional
+        // User::factory(10)->create();
     }
 }
