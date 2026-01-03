@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+\App\Models\User::factory()->count(10)->create();
 
 class DatabaseSeeder extends Seeder
 {
