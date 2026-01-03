@@ -72,51 +72,9 @@
             </div>
         </footer>
 
-        <!-- ⚡ IMPORTANTE: Bootstrap JS Bundle con Popper -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- ⚡ IMPORTANTE: Bootstrap JS Bundle (Gestionado por Vite/App.js ahora) -->
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
-        <!-- 🔧 SCRIPT CRÍTICO: Inicializar dropdowns manualmente -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log('🔧 Iniciando inicialización de Bootstrap...');
-                
-                // Verificar que Bootstrap esté cargado
-                if (typeof bootstrap === 'undefined') {
-                    console.error('❌ ERROR: Bootstrap no está cargado!');
-                    return;
-                }
-                
-                console.log('✅ Bootstrap está disponible');
-                
-                // Encontrar todos los elementos con dropdown
-                const dropdownElementList = document.querySelectorAll('[data-bs-toggle="dropdown"]');
-                console.log('📋 Elementos dropdown encontrados:', dropdownElementList.length);
-                
-                // Inicializar cada dropdown manualmente
-                dropdownElementList.forEach((dropdownToggleEl, index) => {
-                    try {
-                        new bootstrap.Dropdown(dropdownToggleEl, {
-                            autoClose: true,
-                            boundary: 'viewport'
-                        });
-                        console.log(`✅ Dropdown ${index + 1} inicializado correctamente`);
-                    } catch (error) {
-                        console.error(`❌ Error inicializando dropdown ${index + 1}:`, error);
-                    }
-                });
-                
-                console.log('✅ Todos los dropdowns inicializados');
-                
-                // Agregar evento de click manual como respaldo
-                dropdownElementList.forEach((element) => {
-                    element.addEventListener('click', function(e) {
-                        console.log('👆 Click en dropdown detectado');
-                        const dropdown = bootstrap.Dropdown.getInstance(this) || new bootstrap.Dropdown(this);
-                        dropdown.toggle();
-                    });
-                });
-            });
-        </script>
 
         <!-- ✅ WEBSOCKETS: Escuchar notificaciones en tiempo real -->
         @auth
