@@ -368,5 +368,14 @@
         padding: 0.75rem 0;
     }
 }
+
+/* FIX: Ensure navbar is visible on desktop despite Tailwind/Bootstrap conflicts */
+@media (min-width: 992px) {
+    .navbar-expand-lg .navbar-collapse {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
 </style>
 
